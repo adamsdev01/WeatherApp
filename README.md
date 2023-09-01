@@ -4,6 +4,6 @@ Built a user interface for the Pirate Weather API.
 
 ## 🧰 Tools
   - Pirate Weather [API](http://pirateweather.net/en/latest/API/)
-  - Blazor Server
+  - Blazor WASM
   - Net 7
   - Bootstrap
