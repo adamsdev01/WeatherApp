@@ -7,3 +7,4 @@ Built a user interface for the Pirate Weather API.
   - Blazor WASM
   - Net 7
   - Bootstrap
+  - Lat/Long [Finder](https://www.latlong.net/)
