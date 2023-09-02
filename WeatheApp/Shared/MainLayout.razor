@@ -1,13 +1,21 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
     <main>
+        <div class="nav-top-row px-4">
+            <nav class="d-flex flex-row">
+                <div class="nav-item px-1">
+                    <NavLink class="home-nav-link" href="/">
+                        <span class="oi oi-cloud" aria-hidden="true"></span> Weather Forecast
+                    </NavLink>
+                </div>
+            </nav>
+        </div>
         <article class="content px-4">
             @Body
         </article>
+        <div class="footer">
+            <p class="text-center">&copy; @DateTime.Now.Year - Weather App</p>
+        </div>
     </main>
 </div>

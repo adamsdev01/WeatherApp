@@ -6,6 +6,11 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+// base address for pirate weather url
+builder.Services.AddScoped(
+        sp => new HttpClient { BaseAddress = new Uri("https://api.pirateweather.net/forecast/") }
+        );
+
+builder.Configuration.AddJsonFile("appsettings.json", optional:true);
 
 await builder.Build().RunAsync();

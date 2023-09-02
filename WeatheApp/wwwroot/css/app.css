@@ -1,4 +1,5 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('font-awesome/css/all.min.css');
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -99,3 +100,24 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
+/* top bar nav */
+.nav-top-row {
+    justify-content: flex-start;
+    background-color: #0d6efd;
+}
+.home-nav-link {
+    color:white;
+}
+/* footer */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid #d6d5d5;
+    border-bottom: 1px solid #d6d5d5;
+    background-color: #0d6efd;
+    padding-top: 4px;
+}

@@ -1,0 +1,92 @@
+﻿@page "/Weather"
+
+<h1 style="text-align:center">Weather App</h1>
+<br />
+<EditForm Model="dataInputModel" OnValidSubmit="GetWeather">
+    <InputText @bind-Value="dataInputModel.LatLong"></InputText>
+    <button class="btn btn-primary" type="submit"> Get Weather</button>
+</EditForm>
+<br />
+
+@if(weatherModel is not null)
+{
+    <h2 class="mt-4">Current Weather Information</h2>
+    <ul class="list-group">
+        <li class="list-group-item">@weatherModel.currently.summary</li>
+        <li class="list-group-item">@weatherModel.currently.temperature degrees</li>
+    </ul>
+    <h2 class="mt-4 mb-3">Daily Forecast</h2>
+    <div class="d-flex flex-wrap">
+        @foreach (var day in weatherModel.daily.data)
+        {
+            <div class="m-3">
+                <h3>@DateTimeOffset.FromUnixTimeSeconds(day.time).DayOfWeek</h3>
+                @if(day.icon == "clear-day")         
+                {
+                    <i class="oi oi-sun" style="color:yellow; font-size:48px;"></i>
+                }
+                @if (day.icon == "clear-night")
+                {
+                    <i class="oi oi-sun" style="color:yellow; font-size:48px;"></i>
+                }
+                @if (day.icon == "rain")
+                {
+                    <i class="oi oi-rain" style="color:lightblue; font-size:48px;"></i>
+                }
+                 @if (day.icon == "snow")
+                {
+                    <i class="fa-solid fa-snowflake" style="color:lightblue; font-size:48px;"></i>
+                }
+                @if (day.icon == "sleet")
+                {
+                    <i class="oi oi-rain" style="color:lightblue; font-size:48px;"></i>
+                }
+                 @if (day.icon == "wind")
+                {
+                    <i class="oi oi-wind" style="color:lightblue; font-size:48px;"></i>
+                }
+                @if (day.icon == "fog")
+                {
+                    <i class="fa-solid fa-smog" style="color:lightblue; font-size:48px;"></i>
+                }
+                @if (day.icon == "cloudy")
+                {
+                    <i class="oi oi-cloudy" style="color:lightblue; font-size:48px;"></i>
+                }
+                @if (day.icon == "partly-cloudy-day")
+                {
+                    <i class="fa-solid fa-cloud-sun" style="color:lightblue; font-size:48px;"></i>
+                }
+                @if (day.icon == "partly-cloudy-night")
+                {
+                    <i class="oi oi-cloudy" style="color:lightblue; font-size:48px;"></i>
+                }
+                <p>High: @day.apparentTemperatureMax</p>
+                <p>Low: @day.apparentTemperatureMin</p>
+            </div>
+        }
+    </div>
+}
+<br />
+<br />
+
+@code {
+
+    public string LatLong = "41.883230,-87.632400"; // Chicago
+
+    private WeatherModel? weatherModel;
+
+    private WeatherDataInputModel? dataInputModel = new();
+
+    protected override void OnInitialized()
+    {
+        LatLong =  dataInputModel.LatLong;
+    }
+
+    private async Task GetWeather()
+    {
+        string? apiKey = config.GetValue<string>("WeatherApiKey");
+        weatherModel = await Http.GetFromJsonAsync<WeatherModel>($"{apiKey}/{dataInputModel.LatLong}");
+    }
+
+}
